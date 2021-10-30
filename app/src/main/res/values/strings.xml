@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">test-app</string>
+
+    <string name="content_description_app_bar_logo">Logo</string>
+    <string name="content_description_app_bar_navigation_icon">Arrow back</string>
+
+    <string name="app_bar_clear_button_text">Clear</string>
+</resources>
