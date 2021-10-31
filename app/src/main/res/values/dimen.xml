@@ -58,6 +58,7 @@
     <dimen name="grid_unit_64x">128dp</dimen>
     <dimen name="grid_unit_65x">130dp</dimen>
     <dimen name="grid_unit_68x">136dp</dimen>
+    <dimen name="grid_unit_70x">140dp</dimen>
     <dimen name="grid_unit_72x">144dp</dimen>
     <dimen name="grid_unit_75x">150dp</dimen>
     <dimen name="grid_unit_76x">152dp</dimen>
