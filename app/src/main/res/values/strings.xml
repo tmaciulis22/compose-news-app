@@ -7,4 +7,9 @@
     <string name="content_description_news_item_image">News image</string>
 
     <string name="app_bar_clear_button_text">Clear</string>
+
+    <string name="placeholder_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non tortor et nunc semper pharetra ac finibus lorem. Curabitur quis viverra nunc. Aenean ligula ex, placerat in tincidunt a, porta a metus. Suspendisse potenti. Integer lacus enim, imperdiet placerat porta id, lobortis eu felis. Etiam neque felis, suscipit id dui eget, feugiat bibendum mi. Interdum et malesuada fames ac ante ipsum primis in faucibus.</string>
+
+    <string name="articles_list_title">News</string>
+    <string name="articles_list_title_quantity">%1d news</string>
 </resources>
