@@ -1,4 +1,4 @@
-package com.example.test_app.ui.news
+package com.example.test_app.ui.articles
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -18,7 +18,7 @@ import coil.compose.rememberImagePainter
 import com.example.test_app.R
 
 @Composable
-fun NewsCard(
+fun ArticleCard(
     imageUrl: String,
     title: String,
     description: String,
@@ -58,8 +58,8 @@ fun NewsCard(
 
 @Preview
 @Composable
-fun NewsCardPreview() {
-    NewsCard(
+fun ArticleCardPreview() {
+    ArticleCard(
         imageUrl = "https://www.siliconrepublic.com/wp-content/uploads/2020/03/BOO_3353_2.jpg",
         title = "Nick Leeder appointed as latest head of Google Ireland",
         description = "Google has announced that Nick Leeder will replace Fionnuala Meehan as the head of its Irish operation starting in April.",
