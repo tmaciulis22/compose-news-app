@@ -9,9 +9,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.dimensionResource
-import com.example.test_app.MainActivity.Companion.MAX_ARTICLES
 import com.example.test_app.R
 import com.example.test_app.api.entity.Articles
+import com.example.test_app.di.ApiModule.MAX_ARTICLES
 
 @Composable
 fun ArticlesList(

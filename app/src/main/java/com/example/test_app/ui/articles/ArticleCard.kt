@@ -26,7 +26,7 @@ fun ArticleCard(
 ) {
     Card(
         modifier = Modifier.clickable{ onClick(articleUrl ?: "") },
-        elevation = dimensionResource(R.dimen.grid_unit_8x)
+        elevation = dimensionResource(R.dimen.grid_unit_4x)
     ) {
         Row(verticalAlignment = Alignment.Top) {
             LoadingImage(
