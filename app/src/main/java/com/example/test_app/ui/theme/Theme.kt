@@ -12,7 +12,8 @@ private val DarkColorPalette = darkColors(
     secondary = SacoDarkGrey,
     surface = Surface,
     onSurface = SacoBlack,
-    background = Background
+    background = Background,
+    onBackground = SacoBlack
 )
 
 private val LightColorPalette = lightColors(
@@ -21,7 +22,8 @@ private val LightColorPalette = lightColors(
     secondary = SacoDarkGrey,
     surface = Surface,
     onSurface = SacoBlack,
-    background = Background
+    background = Background,
+    onBackground = SacoBlack
 )
 
 @Composable

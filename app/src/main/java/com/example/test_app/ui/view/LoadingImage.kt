@@ -22,7 +22,9 @@ fun LoadingImage(
     contentDescription: String? = null
 ) {
     Image(
-        painter = rememberImagePainter(imageUrl),
+        painter = rememberImagePainter(imageUrl, builder = {
+            crossfade(true)
+        }),
         modifier = modifier.placeholder(
             visible = isLoading,
             highlight = PlaceholderHighlight.shimmer(),

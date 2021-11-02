@@ -1,5 +1,6 @@
 package com.example.test_app.ui.articles
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
@@ -25,10 +26,15 @@ fun ArticleCard(
     onClick: ((String) -> Unit) = {}
 ) {
     Card(
-        modifier = Modifier.clickable{ onClick(articleUrl ?: "") },
-        elevation = dimensionResource(R.dimen.grid_unit_4x)
+        modifier = Modifier
+            .clickable{ onClick(articleUrl ?: "") }
+            .fillMaxWidth(),
+        elevation = dimensionResource(R.dimen.grid_unit_4x),
     ) {
-        Row(verticalAlignment = Alignment.Top) {
+        Row(
+            modifier = Modifier.background(MaterialTheme.colors.surface),
+            verticalAlignment = Alignment.Top
+        ) {
             LoadingImage(
                 isLoading = isLoading,
                 imageUrl = imageUrl,

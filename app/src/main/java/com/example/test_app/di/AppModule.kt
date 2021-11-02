@@ -2,7 +2,10 @@ package com.example.test_app.di
 
 import com.example.test_app.api.endpoint.HeadlinesEndpoint
 import com.example.test_app.api.network.ApiResponseAdapterFactory
+import com.example.test_app.repository.HeadlinesRepository
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,14 +13,13 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.util.*
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object ApiModule {
+object AppModule {
 
-    // Due to GNews api limitation only 10 articles can be retrieved per request
-    const val MAX_ARTICLES = 10
     private const val BASE_URL_API = "https://gnews.io/api/v4/"
     private const val API_TOKEN_QUERY_PARAM = "token"
     // TODO: move this to keystore
@@ -26,7 +28,11 @@ object ApiModule {
     @Singleton
     @Provides
     fun provideMoshi(): Moshi =
-        Moshi.Builder().build()
+        Moshi
+            .Builder()
+            .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
+            .addLast(KotlinJsonAdapterFactory())
+            .build()
 
     @Singleton
     @Provides
@@ -50,8 +56,8 @@ object ApiModule {
     fun provideRetrofit(moshi: Moshi, client: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(BASE_URL_API)
-            .addCallAdapterFactory(ApiResponseAdapterFactory())
             .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addCallAdapterFactory(ApiResponseAdapterFactory())
             .client(client)
             .build()
 
@@ -59,4 +65,9 @@ object ApiModule {
     @Provides
     fun provideHeadlinesEndpoint(retrofit: Retrofit): HeadlinesEndpoint =
         retrofit.create(HeadlinesEndpoint::class.java)
+
+    @Singleton
+    @Provides
+    fun provideHeadlinesRepository(headlinesEndpoint: HeadlinesEndpoint): HeadlinesRepository =
+        HeadlinesRepository(headlinesEndpoint)
 }
