@@ -1,7 +1,7 @@
 package com.example.test_app.repository
 
 import com.example.test_app.api.endpoint.SearchEndpoint
-import com.example.test_app.api.entity.InAttribute
+import com.example.test_app.api.entity.SearchInAttribute
 import javax.inject.Inject
 
 class SearchRepository @Inject constructor(
@@ -11,6 +11,6 @@ class SearchRepository @Inject constructor(
     suspend fun getArticles(
         from: String? = null,
         to: String? = null,
-        inAttributes: List<InAttribute>? = null
-    ) = searchEndpoint.getArticles(from, to, InAttribute.getAttributesList(inAttributes))
+        searchInAttributes: List<SearchInAttribute>? = null
+    ) = searchEndpoint.getArticles(from, to, SearchInAttribute.getAttributesList(searchInAttributes))
 }

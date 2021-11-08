@@ -74,7 +74,7 @@ fun DateSelector(
 @Preview
 @Composable
 fun DateSelectorPreview() {
-    DateSelector()
+    DateSelector("From")
 }
 
 private fun showDatePicker(

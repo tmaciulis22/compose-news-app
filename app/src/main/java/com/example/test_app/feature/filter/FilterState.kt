@@ -1,9 +1,11 @@
 package com.example.test_app.feature.filter
 
+import com.example.test_app.api.entity.SearchInAttribute
+
 data class FilterState(
     val from: String? = null,
     val to: String? = null,
-    val searchIn: String? = null
+    val searchIn: List<SearchInAttribute> = listOf(SearchInAttribute.Title, SearchInAttribute.Description)
 ) {
     val count: Int
         get() {
@@ -11,7 +13,8 @@ data class FilterState(
 
             from?.let { totalCount++ }
             to?.let { totalCount++ }
-            searchIn?.let { totalCount++ }
+            if (searchIn.count() > 0)
+                totalCount++
 
             return totalCount
         }

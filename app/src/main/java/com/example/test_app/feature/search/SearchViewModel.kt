@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.test_app.api.entity.InAttribute
+import com.example.test_app.api.entity.SearchInAttribute
 import com.example.test_app.feature.filter.FilterState
 import com.example.test_app.repository.SearchHistoryRepository
 import com.example.test_app.repository.SearchRepository
@@ -37,12 +37,18 @@ class SearchViewModel @Inject constructor(
         filterState = filterState.copy(to = to)
     }
 
-    fun setSearchInFilter(searchIn: String) {
-        filterState = filterState.copy(searchIn = searchIn)
+    fun setSearchInFilter(searchInAttribute: SearchInAttribute, isChecked: Boolean) {
+        val previousSelections = filterState.searchIn.toMutableList()
+        if (isChecked)
+            previousSelections.add(searchInAttribute)
+        else
+            previousSelections.remove(searchInAttribute)
+        filterState = filterState.copy(searchIn = previousSelections.toList())
     }
 
-    fun clearSearchIn() {
-        filterState = filterState.copy(searchIn = null)
+    // Since by default GNews API search in title and description, clearSearchInFilter resets state to these attributes
+    fun clearSearchInFilter() {
+        filterState = filterState.copy(searchIn = listOf(SearchInAttribute.Title, SearchInAttribute.Description))
     }
 
     fun clearFilters() {
@@ -52,13 +58,13 @@ class SearchViewModel @Inject constructor(
     fun getArticles(
         from: String? = null,
         to: String? = null,
-        inAttributes: List<InAttribute>? = null
+        searchInAttributes: List<SearchInAttribute>? = null
     ) = viewModelScope.launch {
         searchScreenState = SearchScreenState(isLoading = true)
         searchRepository.getArticles(
             from,
             to,
-            inAttributes
+            searchInAttributes
         ).get(onSuccess = {
             searchScreenState = SearchScreenState(data = it)
         }, onFailure = { _, _ ->

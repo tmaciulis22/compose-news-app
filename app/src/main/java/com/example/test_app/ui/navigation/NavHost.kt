@@ -10,6 +10,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import com.example.test_app.feature.UnimplementedScreen
 import com.example.test_app.feature.filter.FilterScreen
+import com.example.test_app.feature.filter.SearchInScreen
 import com.example.test_app.feature.news.NewsScreen
 import com.example.test_app.feature.search.SearchScreen
 import com.example.test_app.feature.search.SearchViewModel
@@ -281,7 +282,13 @@ fun NavGraphBuilder.searchGraph(navController: NavHostController) {
                 slideOutHorizontally({ it })
             }
         ) {
-            UnimplementedScreen()
+            val parentEntry = remember {
+                navController.getBackStackEntry(Route.SearchTab.name)
+            }
+            val searchViewModel = hiltViewModel<SearchViewModel>(
+                parentEntry
+            )
+            SearchInScreen(navController, searchViewModel)
         }
     }
 }

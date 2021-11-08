@@ -33,8 +33,17 @@
     <string name="filters_from_label">From</string>
     <string name="filters_to_label">To</string>
     <string name="filters_date_placeholder">yyyy/mm/dd</string>
-    <string name="filters_button_text">Apply</string>
+    <plurals name="filters_button_text">
+        <item quantity="one">Apply filter</item>
+        <item quantity="other">Apply filters</item>
+    </plurals>
+    <string name="filters_search_in_title">Title</string>
+    <string name="filters_search_in_description">Description</string>
+    <string name="filters_search_in_content">Content</string>
     <string name="date_picker_date_pattern">yyyy/MM/dd</string>
+
+    <string name="search_in_title">Search in</string>
+    <string name="search_in_button_text">Apply</string>
 
     <string name="filter_title">Title</string>
     <string name="filter_description">Description</string>
