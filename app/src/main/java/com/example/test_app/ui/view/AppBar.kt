@@ -53,7 +53,7 @@ fun AppBar(
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun AppBarPreview() {
     TestappTheme {
@@ -61,7 +61,7 @@ fun AppBarPreview() {
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun AppBarWithButtonsPreview() {
     TestappTheme {

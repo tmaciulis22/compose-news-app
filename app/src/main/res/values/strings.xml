@@ -12,4 +12,12 @@
 
     <string name="articles_list_title">News</string>
     <string name="articles_list_title_quantity">%1d news</string>
+
+    <string name="bottom_nav_bar_item_home">Home</string>
+    <string name="bottom_nav_bar_item_news">News</string>
+    <string name="bottom_nav_bar_item_search">Search</string>
+    <string name="bottom_nav_bar_item_profile">Profile</string>
+    <string name="bottom_nav_bar_item_more">More</string>
+
+    <string name="unimplemented_screen_text">This screen is not implemented since it was not included in the task requirements.</string>
 </resources>
