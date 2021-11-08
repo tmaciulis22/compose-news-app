@@ -5,6 +5,8 @@
     <string name="content_description_app_bar_navigation_icon">Arrow back</string>
     <string name="content_description_app_bar_clear_icon">Clear</string>
     <string name="content_description_news_item_image">News image</string>
+    <string name="content_description_filter_icon">Filter</string>
+    <string name="content_description_sort_icon">Sort</string>
 
     <string name="app_bar_clear_button_text">Clear</string>
 
@@ -20,4 +22,6 @@
     <string name="bottom_nav_bar_item_more">More</string>
 
     <string name="unimplemented_screen_text">This screen is not implemented since it was not included in the task requirements.</string>
+
+    <string name="search_bar_text_field_label">Search</string>
 </resources>

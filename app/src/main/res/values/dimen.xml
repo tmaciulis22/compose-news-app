@@ -28,6 +28,7 @@
     <dimen name="grid_unit_24x">48dp</dimen>
     <dimen name="grid_unit_25x">50dp</dimen>
     <dimen name="grid_unit_26x">52dp</dimen>
+    <dimen name="grid_unit_27x">54dp</dimen>
     <dimen name="grid_unit_28x">56dp</dimen>
     <dimen name="grid_unit_30x">60dp</dimen>
     <dimen name="grid_unit_32x">64dp</dimen>

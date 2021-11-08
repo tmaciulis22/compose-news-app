@@ -6,7 +6,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.test_app.R
@@ -25,14 +25,14 @@ fun AppBar(
 
     val topBarModifier = if (isRounded)
         Modifier
-            .graphicsLayer {
+            .shadow(
+                elevation = elevation,
                 shape = RoundedCornerShape(
                     bottomStart = cornerRadius,
                     bottomEnd = cornerRadius
-                )
-                shadowElevation = elevation.toPx()
+                ),
                 clip = true
-            }
+            )
     else
         Modifier
 
