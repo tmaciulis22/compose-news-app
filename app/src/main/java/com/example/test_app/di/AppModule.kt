@@ -1,8 +1,10 @@
 package com.example.test_app.di
 
 import com.example.test_app.api.endpoint.HeadlinesEndpoint
+import com.example.test_app.api.endpoint.SearchEndpoint
 import com.example.test_app.api.network.ApiResponseAdapterFactory
 import com.example.test_app.repository.HeadlinesRepository
+import com.example.test_app.repository.SearchRepository
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -70,4 +72,14 @@ object AppModule {
     @Provides
     fun provideHeadlinesRepository(headlinesEndpoint: HeadlinesEndpoint): HeadlinesRepository =
         HeadlinesRepository(headlinesEndpoint)
+
+    @Singleton
+    @Provides
+    fun provideSearchEndpoint(retrofit: Retrofit): SearchEndpoint =
+        retrofit.create(SearchEndpoint::class.java)
+
+    @Singleton
+    @Provides
+    fun provideSearchRepository(searchEndpoint: SearchEndpoint): SearchRepository =
+        SearchRepository(searchEndpoint)
 }
