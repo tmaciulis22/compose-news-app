@@ -26,4 +26,17 @@
     <string name="search_bar_text_field_label">Search</string>
 
     <string name="search_history_list_title">Search History</string>
+
+    <string name="filters_title">Filter</string>
+    <string name="filters_subtitle_date">Date</string>
+    <string name="filters_subtitle_search_in">Search in</string>
+    <string name="filters_from_label">From</string>
+    <string name="filters_to_label">To</string>
+    <string name="filters_date_placeholder">yyyy/mm/dd</string>
+    <string name="filters_button_text">Apply</string>
+    <string name="date_picker_date_pattern">yyyy/MM/dd</string>
+
+    <string name="filter_title">Title</string>
+    <string name="filter_description">Description</string>
+    <string name="filter_content">Content</string>
 </resources>

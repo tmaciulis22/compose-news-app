@@ -1,58 +1,62 @@
 package com.example.test_app.ui.navigation
 
-import android.webkit.WebView
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import com.example.test_app.feature.UnimplementedScreen
+import com.example.test_app.feature.filter.FilterScreen
 import com.example.test_app.feature.news.NewsScreen
 import com.example.test_app.feature.search.SearchScreen
+import com.example.test_app.feature.search.SearchViewModel
 import com.example.test_app.feature.webView.WebViewScreen
-import com.example.test_app.ui.navigation.Route
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
+import com.google.accompanist.navigation.animation.navigation
 
 @Composable
 @ExperimentalAnimationApi
 fun AppNavHost(navController: NavHostController) {
-    AnimatedNavHost(navController = navController, startDestination = Route.Search.name) {
+    AnimatedNavHost(navController = navController, startDestination = Route.SearchTab.name) {
         composable(
-            Route.Home.name,
+            Route.HomeTab.name,
             enterTransition = { initial, _ ->
                 when (initial.destination.route) {
-                    Route.News.name,
+                    Route.NewsTab.name,
                     Route.Search.name,
-                    Route.Profile.name,
-                    Route.More.name -> slideInHorizontally({ -it })
+                    Route.ProfileTab.name,
+                    Route.MoreTab.name -> slideInHorizontally({ -it })
                     else -> slideInHorizontally({ it })
                 }
             },
             exitTransition = { _, target ->
                 when (target.destination.route) {
-                    Route.News.name,
+                    Route.NewsTab.name,
                     Route.Search.name,
-                    Route.Profile.name,
-                    Route.More.name -> slideOutHorizontally({ it })
+                    Route.ProfileTab.name,
+                    Route.MoreTab.name -> slideOutHorizontally({ it })
                     else -> slideOutHorizontally({ -it })
                 }
             },
             popEnterTransition = { initial, _ ->
                 when (initial.destination.route) {
-                    Route.News.name,
+                    Route.NewsTab.name,
                     Route.Search.name,
-                    Route.Profile.name,
-                    Route.More.name -> slideInHorizontally({ -it })
+                    Route.ProfileTab.name,
+                    Route.MoreTab.name -> slideInHorizontally({ -it })
                     else -> slideInHorizontally({ it })
                 }
             },
             popExitTransition = { _, target ->
                 when (target.destination.route) {
-                    Route.News.name,
+                    Route.NewsTab.name,
                     Route.Search.name,
-                    Route.Profile.name,
-                    Route.More.name -> slideOutHorizontally({ it })
+                    Route.ProfileTab.name,
+                    Route.MoreTab.name -> slideOutHorizontally({ it })
                     else -> slideOutHorizontally({ -it })
                 }
             }
@@ -60,101 +64,69 @@ fun AppNavHost(navController: NavHostController) {
             UnimplementedScreen()
         }
         composable(
-            Route.News.name,
+            Route.NewsTab.name,
             enterTransition = { initial, _ ->
                 when (initial.destination.route) {
-                    Route.Home.name -> slideInHorizontally({ it })
+                    Route.HomeTab.name -> slideInHorizontally({ it })
                     Route.Search.name,
-                    Route.Profile.name,
-                    Route.More.name -> slideInHorizontally({ -it })
+                    Route.ProfileTab.name,
+                    Route.MoreTab.name -> slideInHorizontally({ -it })
                     else -> null
                 }
             },
             exitTransition = { _, target ->
                 when (target.destination.route) {
-                    Route.Home.name -> slideOutHorizontally({ it })
+                    Route.HomeTab.name -> slideOutHorizontally({ it })
                     Route.Search.name,
-                    Route.Profile.name,
-                    Route.More.name -> slideOutHorizontally({ -it })
+                    Route.ProfileTab.name,
+                    Route.MoreTab.name -> slideOutHorizontally({ -it })
                     else -> null
                 }
             },
             popEnterTransition = { initial, _ ->
                 when (initial.destination.route) {
-                    Route.Home.name -> slideInHorizontally({ it })
+                    Route.HomeTab.name -> slideInHorizontally({ it })
                     Route.Search.name,
-                    Route.Profile.name,
-                    Route.More.name -> slideInHorizontally({ -it })
+                    Route.ProfileTab.name,
+                    Route.MoreTab.name -> slideInHorizontally({ -it })
                     else -> null
                 }
             },
             popExitTransition = { _, target ->
                 when (target.destination.route) {
-                    Route.Home.name -> slideOutHorizontally({ it })
+                    Route.HomeTab.name -> slideOutHorizontally({ it })
                     Route.Search.name,
-                    Route.Profile.name,
-                    Route.More.name -> slideOutHorizontally({ -it })
+                    Route.ProfileTab.name,
+                    Route.MoreTab.name -> slideOutHorizontally({ -it })
                     else -> null
                 }            }
         ) {
             NewsScreen(navController)
         }
+        searchGraph(navController)
         composable(
-            Route.Search.name,
+            Route.ProfileTab.name,
             enterTransition = { initial, _ ->
                 when (initial.destination.route) {
-                    Route.Profile.name,
-                    Route.More.name -> slideInHorizontally({ -it })
+                    Route.MoreTab.name -> slideInHorizontally({ -it })
                     else -> slideInHorizontally({ it })
                 }
             },
             exitTransition = { _, target ->
                 when (target.destination.route) {
-                    Route.Profile.name,
-                    Route.More.name  -> slideOutHorizontally({ -it })
+                    Route.MoreTab.name  -> slideOutHorizontally({ -it })
                     else -> slideOutHorizontally({ it })
                 }
             },
             popEnterTransition = { initial, _ ->
                 when (initial.destination.route) {
-                    Route.Profile.name,
-                    Route.More.name  -> slideInHorizontally({ -it })
+                    Route.MoreTab.name  -> slideInHorizontally({ -it })
                     else -> slideInHorizontally({ it })
                 }
             },
             popExitTransition = { _, target ->
                 when (target.destination.route) {
-                    Route.Profile.name,
-                    Route.More.name  -> slideOutHorizontally({ -it })
-                    else -> slideOutHorizontally({ it })
-                }
-            }
-        ) {
-            SearchScreen(navController)
-        }
-        composable(
-            Route.Profile.name,
-            enterTransition = { initial, _ ->
-                when (initial.destination.route) {
-                    Route.More.name -> slideInHorizontally({ -it })
-                    else -> slideInHorizontally({ it })
-                }
-            },
-            exitTransition = { _, target ->
-                when (target.destination.route) {
-                    Route.More.name  -> slideOutHorizontally({ -it })
-                    else -> slideOutHorizontally({ it })
-                }
-            },
-            popEnterTransition = { initial, _ ->
-                when (initial.destination.route) {
-                    Route.More.name  -> slideInHorizontally({ -it })
-                    else -> slideInHorizontally({ it })
-                }
-            },
-            popExitTransition = { _, target ->
-                when (target.destination.route) {
-                    Route.More.name  -> slideOutHorizontally({ -it })
+                    Route.MoreTab.name  -> slideOutHorizontally({ -it })
                     else -> slideOutHorizontally({ it })
                 }
             }
@@ -162,40 +134,40 @@ fun AppNavHost(navController: NavHostController) {
             UnimplementedScreen()
         }
         composable(
-            Route.More.name,
+            Route.MoreTab.name,
             enterTransition = { initial, _ ->
                 when (initial.destination.route) {
-                    Route.Home.name,
-                    Route.News.name,
+                    Route.HomeTab.name,
+                    Route.NewsTab.name,
                     Route.Search.name,
-                    Route.Profile.name -> slideInHorizontally({ it })
+                    Route.ProfileTab.name -> slideInHorizontally({ it })
                     else -> slideInHorizontally({ -it })
                 }
             },
             exitTransition = { _, target ->
                 when (target.destination.route) {
-                    Route.Home.name,
-                    Route.News.name,
+                    Route.HomeTab.name,
+                    Route.NewsTab.name,
                     Route.Search.name,
-                    Route.Profile.name -> slideOutHorizontally({ -it })
+                    Route.ProfileTab.name -> slideOutHorizontally({ -it })
                     else -> slideOutHorizontally({ it })
                 }
             },
             popEnterTransition = { initial, _ ->
                 when (initial.destination.route) {
-                    Route.Home.name,
-                    Route.News.name,
+                    Route.HomeTab.name,
+                    Route.NewsTab.name,
                     Route.Search.name,
-                    Route.Profile.name -> slideInHorizontally({ it })
+                    Route.ProfileTab.name -> slideInHorizontally({ it })
                     else -> slideInHorizontally({ -it })
                 }
             },
             popExitTransition = { _, target ->
                 when (target.destination.route) {
-                    Route.Home.name,
-                    Route.News.name,
+                    Route.HomeTab.name,
+                    Route.NewsTab.name,
                     Route.Search.name,
-                    Route.Profile.name -> slideOutHorizontally({ -it })
+                    Route.ProfileTab.name -> slideOutHorizontally({ -it })
                     else -> slideOutHorizontally({ it })
                 }
             }
@@ -222,6 +194,94 @@ fun AppNavHost(navController: NavHostController) {
                 navController,
                 it.arguments?.getString(Route.WebView.argumentKey) ?: ""
             )
+        }
+    }
+}
+
+@ExperimentalAnimationApi
+fun NavGraphBuilder.searchGraph(navController: NavHostController) {
+    navigation(
+        startDestination = Route.Search.name,
+        route = Route.SearchTab.name,
+        enterTransition = { initial, _ ->
+            when (initial.destination.route) {
+                Route.ProfileTab.name,
+                Route.MoreTab.name -> slideInHorizontally({ -it })
+                else -> slideInHorizontally({ it })
+            }
+        },
+        exitTransition = { _, target ->
+            when (target.destination.route) {
+                Route.ProfileTab.name,
+                Route.MoreTab.name  -> slideOutHorizontally({ -it })
+                else -> slideOutHorizontally({ it })
+            }
+        },
+        popEnterTransition = { initial, _ ->
+            when (initial.destination.route) {
+                Route.ProfileTab.name,
+                Route.MoreTab.name  -> slideInHorizontally({ -it })
+                else -> slideInHorizontally({ it })
+            }
+        },
+        popExitTransition = { _, target ->
+            when (target.destination.route) {
+                Route.ProfileTab.name,
+                Route.MoreTab.name  -> slideOutHorizontally({ -it })
+                else -> slideOutHorizontally({ it })
+            }
+        }
+    ) {
+        composable(
+            Route.Search.name
+        ) {
+            val parentEntry = remember {
+                navController.getBackStackEntry(Route.SearchTab.name)
+            }
+            val searchViewModel = hiltViewModel<SearchViewModel>(
+                parentEntry
+            )
+            SearchScreen(navController, searchViewModel)
+        }
+        composable(
+            Route.Filter.name,
+            enterTransition = { _, _ ->
+                slideInHorizontally({ it })
+            },
+            exitTransition = { _, _ ->
+                slideOutHorizontally({ it })
+            },
+            popEnterTransition = { _, _ ->
+                slideInHorizontally({ it })
+            },
+            popExitTransition = { _, _ ->
+                slideOutHorizontally({ it })
+            }
+        ) {
+            val parentEntry = remember {
+                navController.getBackStackEntry(Route.SearchTab.name)
+            }
+            val searchViewModel = hiltViewModel<SearchViewModel>(
+                parentEntry
+            )
+            FilterScreen(navController, searchViewModel)
+        }
+        composable(
+            Route.SearchIn.name,
+            enterTransition = { _, _ ->
+                slideInHorizontally({ it })
+            },
+            exitTransition = { _, _ ->
+                slideOutHorizontally({ it })
+            },
+            popEnterTransition = { _, _ ->
+                slideInHorizontally({ it })
+            },
+            popExitTransition = { _, _ ->
+                slideOutHorizontally({ it })
+            }
+        ) {
+            UnimplementedScreen()
         }
     }
 }

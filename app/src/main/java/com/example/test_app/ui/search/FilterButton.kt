@@ -17,6 +17,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.zIndex
 import com.example.test_app.R
 
 @Composable
@@ -32,11 +33,12 @@ fun FilterButton(
                         color = MaterialTheme.colors.primaryVariant,
                         shape = CircleShape
                     )
-                    .sizeIn(
-                        minWidth = dimensionResource(R.dimen.grid_unit_8x),
-                        minHeight = dimensionResource(R.dimen.grid_unit_8x)
+                    .size(
+                        width = dimensionResource(R.dimen.grid_unit_8x),
+                        height = dimensionResource(R.dimen.grid_unit_8x)
                     )
-                    .align(Alignment.TopEnd),
+                    .align(Alignment.TopEnd)
+                    .zIndex(1f),
                 contentAlignment = Alignment.Center
             ) {
                 Text(

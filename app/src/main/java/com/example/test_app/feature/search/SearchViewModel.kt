@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.test_app.api.entity.InAttribute
+import com.example.test_app.feature.filter.FilterState
 import com.example.test_app.repository.SearchHistoryRepository
 import com.example.test_app.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,8 +22,31 @@ class SearchViewModel @Inject constructor(
     var searchScreenState by mutableStateOf(SearchScreenState())
         private set
 
+    var filterState by mutableStateOf(FilterState())
+        private set
+
     init {
         getSearchHistory()
+    }
+
+    fun setFromFilter(from: String) {
+        filterState = filterState.copy(from = from)
+    }
+
+    fun setToFilter(to: String) {
+        filterState = filterState.copy(to = to)
+    }
+
+    fun setSearchInFilter(searchIn: String) {
+        filterState = filterState.copy(searchIn = searchIn)
+    }
+
+    fun clearSearchIn() {
+        filterState = filterState.copy(searchIn = null)
+    }
+
+    fun clearFilters() {
+        filterState = FilterState()
     }
 
     fun getArticles(
