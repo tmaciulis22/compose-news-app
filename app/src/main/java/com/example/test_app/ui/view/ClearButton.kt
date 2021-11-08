@@ -2,7 +2,6 @@ package com.example.test_app.ui.view
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -18,10 +17,9 @@ import androidx.compose.ui.semantics.Role
 import com.example.test_app.R
 
 @Composable
-fun ClearButton(onClick: () -> Unit) {
+fun ClearButton(onClick: () -> Unit = {}) {
     Row(
         modifier = Modifier
-            .fillMaxHeight()
             .clip(CircleShape)
             .clickable(onClick = onClick, role = Role.Button),
         verticalAlignment = Alignment.CenterVertically

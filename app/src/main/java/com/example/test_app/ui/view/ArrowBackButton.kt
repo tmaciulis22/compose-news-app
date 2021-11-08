@@ -10,7 +10,7 @@ import androidx.compose.ui.res.stringResource
 import com.example.test_app.R
 
 @Composable
-fun ArrowBackButton(onClick: () -> Unit) {
+fun ArrowBackButton(onClick: () -> Unit = {}) {
     IconButton(onClick = onClick) {
         Icon(
             Icons.Outlined.ArrowBack,

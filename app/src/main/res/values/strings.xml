@@ -24,4 +24,6 @@
     <string name="unimplemented_screen_text">This screen is not implemented since it was not included in the task requirements.</string>
 
     <string name="search_bar_text_field_label">Search</string>
+
+    <string name="search_history_list_title">Search History</string>
 </resources>

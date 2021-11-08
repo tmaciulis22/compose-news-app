@@ -7,15 +7,13 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.test_app.R
 
@@ -23,13 +21,14 @@ import com.example.test_app.R
 fun SearchTextField(
     onSearch: (String) -> Unit = {}
 ) {
-    val textState = remember { mutableStateOf(TextFieldValue()) }
+    var textState by remember { mutableStateOf("") }
+    val focusManager = LocalFocusManager.current
 
     TextField(
         modifier = Modifier
             .fillMaxWidth(),
-        value = textState.value,
-        onValueChange = { textState.value = it },
+        value = textState,
+        onValueChange = { textState = it },
         textStyle = MaterialTheme.typography.h3,
         singleLine = true,
         leadingIcon = { Icon(Icons.Outlined.Search, contentDescription = null) },
@@ -48,7 +47,11 @@ fun SearchTextField(
             unfocusedIndicatorColor = Color.Transparent
         ),
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-        keyboardActions = KeyboardActions(onSearch = { onSearch(textState.value.text) })
+        keyboardActions = KeyboardActions(onSearch = {
+            onSearch(textState)
+            textState = ""
+            focusManager.clearFocus()
+        })
     )
 }
 

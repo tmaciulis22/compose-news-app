@@ -21,7 +21,7 @@ fun WebViewScreen(
     Scaffold(
         topBar = {
             AppBar(
-                isRounded = false,
+                isPadded = false,
                 title = {
                     Text(
                         text = url,

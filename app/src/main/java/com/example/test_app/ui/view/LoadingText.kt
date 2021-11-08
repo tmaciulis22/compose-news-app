@@ -23,10 +23,11 @@ fun LoadingText(
     overflow: TextOverflow = TextOverflow.Ellipsis
 ) {
     Text(
-        modifier = Modifier.placeholder(
-            visible = isLoading,
-            highlight = PlaceholderHighlight.shimmer(),
-        ),
+        modifier = Modifier
+            .placeholder(
+                visible = isLoading,
+                highlight = PlaceholderHighlight.shimmer(),
+            ),
         text = text ?: stringResource(id = R.string.placeholder_text),
         style = style,
         maxLines = maxLines,

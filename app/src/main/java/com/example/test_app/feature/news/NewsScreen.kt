@@ -24,7 +24,7 @@ fun NewsScreen(
 
     Scaffold(
         topBar = {
-            AppBar()
+            AppBar(isRounded = true)
         }
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {

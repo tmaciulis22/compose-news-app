@@ -24,5 +24,8 @@ enum class Route(
     companion object {
         val bottomNavItems: List<Route>
             get() = listOf(Home, News, Search, Profile, More)
+
+        val bottomNavItemsRoutes: List<String>
+            get() = listOf(Home.name, News.name, Search.name, Profile.name, More.name)
     }
 }

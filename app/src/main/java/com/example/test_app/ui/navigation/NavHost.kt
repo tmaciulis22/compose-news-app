@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import com.example.test_app.feature.UnimplementedScreen
 import com.example.test_app.feature.news.NewsScreen
+import com.example.test_app.feature.search.SearchScreen
 import com.example.test_app.feature.webView.WebViewScreen
 import com.example.test_app.ui.navigation.Route
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -16,7 +17,7 @@ import com.google.accompanist.navigation.animation.composable
 @Composable
 @ExperimentalAnimationApi
 fun AppNavHost(navController: NavHostController) {
-    AnimatedNavHost(navController = navController, startDestination = Route.News.name) {
+    AnimatedNavHost(navController = navController, startDestination = Route.Search.name) {
         composable(
             Route.Home.name,
             enterTransition = { initial, _ ->
@@ -129,7 +130,7 @@ fun AppNavHost(navController: NavHostController) {
                 }
             }
         ) {
-            UnimplementedScreen()
+            SearchScreen(navController)
         }
         composable(
             Route.Profile.name,

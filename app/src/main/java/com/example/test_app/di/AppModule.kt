@@ -1,8 +1,12 @@
 package com.example.test_app.di
 
+import android.content.Context
+import androidx.room.Room
 import com.example.test_app.api.endpoint.HeadlinesEndpoint
 import com.example.test_app.api.endpoint.SearchEndpoint
 import com.example.test_app.api.network.ApiResponseAdapterFactory
+import com.example.test_app.database.AppDatabase
+import com.example.test_app.database.dao.SearchHistoryDao
 import com.example.test_app.repository.HeadlinesRepository
 import com.example.test_app.repository.SearchRepository
 import com.squareup.moshi.Moshi
@@ -11,6 +15,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -26,6 +31,22 @@ object AppModule {
     private const val API_TOKEN_QUERY_PARAM = "token"
     // TODO: move this to keystore
     private const val API_TOKEN = "a2d8e0f0981b98b00e901e7c0e62d4fd"
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
+        return Room.databaseBuilder(
+            appContext,
+            AppDatabase::class.java,
+            "test-app-database"
+        ).build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideChannelDao(appDatabase: AppDatabase): SearchHistoryDao {
+        return appDatabase.searchHistoryDao()
+    }
 
     @Singleton
     @Provides

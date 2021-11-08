@@ -6,10 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.test_app.ui.navigation.AppNavHost
+import com.example.test_app.ui.navigation.Route
 import com.example.test_app.ui.theme.TestappTheme
 import com.example.test_app.ui.view.BottomNavBar
 import com.example.test_app.ui.view.TransparentStatusBar
@@ -25,12 +27,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             TestappTheme {
                 val navController = rememberAnimatedNavController()
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = navBackStackEntry?.destination?.route
 
                 TransparentStatusBar()
                 Scaffold(
                     bottomBar = {
-                        // TODO hide this when necessary
-                        BottomNavBar(navController)
+                        if (Route.bottomNavItemsRoutes.any { it == currentRoute })
+                            BottomNavBar(navController)
                     }
                 ) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
