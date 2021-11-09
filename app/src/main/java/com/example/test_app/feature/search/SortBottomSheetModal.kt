@@ -19,6 +19,7 @@ fun SortBottomSheetModal(
     searchViewModel: SearchViewModel
 ) {
     val filterState = searchViewModel.filterState
+    val sortState = searchViewModel.sortState
 
     Column(
         modifier = Modifier
@@ -37,7 +38,7 @@ fun SortBottomSheetModal(
         Divider(color = Color.LightGray)
         LabeledCheckbox(
             label = stringResource(R.string.sort_by_upload_date),
-            isChecked = filterState.sortBy == SortBy.PublishedAt
+            isChecked = sortState == SortBy.PublishedAt
         ) { wasAlreadyChecked ->
             if (!wasAlreadyChecked) {
                 searchViewModel.setSortBy(SortBy.PublishedAt)
@@ -47,7 +48,10 @@ fun SortBottomSheetModal(
             }
         }
         Divider(color = Color.LightGray)
-        LabeledCheckbox(label = stringResource(R.string.sort_by_relevance), isChecked = filterState.sortBy == SortBy.Relevance) { wasAlreadyChecked ->
+        LabeledCheckbox(
+            label = stringResource(R.string.sort_by_relevance),
+            isChecked = sortState == SortBy.Relevance
+        ) { wasAlreadyChecked ->
             if (!wasAlreadyChecked) {
                 searchViewModel.setSortBy(SortBy.Relevance)
                 if (!filterState.queryText.isNullOrBlank()) {

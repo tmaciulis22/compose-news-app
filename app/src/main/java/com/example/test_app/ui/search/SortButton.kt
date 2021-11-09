@@ -32,7 +32,7 @@ fun SortButton(
         Icon(
             painterResource(R.drawable.ic_sort),
             stringResource(R.string.content_description_sort_icon),
-            tint = if (isSorted) MaterialTheme.colors.onSurface else Color.White
+            tint = if (isSorted) Color.White else MaterialTheme.colors.onSurface
         )
     }
 }

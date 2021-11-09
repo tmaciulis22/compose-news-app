@@ -7,8 +7,7 @@ data class FilterState(
     val queryText: String? = null,
     val from: String? = null,
     val to: String? = null,
-    val searchIn: List<SearchInAttribute> = listOf(),
-    val sortBy: SortBy? = null
+    val searchIn: List<SearchInAttribute> = listOf()
 ) {
     val count: Int
         get() {

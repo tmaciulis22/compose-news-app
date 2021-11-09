@@ -27,6 +27,8 @@ class SearchViewModel @Inject constructor(
     var filterState by mutableStateOf(FilterState())
         private set
 
+    var sortState by mutableStateOf<SortBy?>(null)
+
     init {
         getSearchHistory()
     }
@@ -53,7 +55,7 @@ class SearchViewModel @Inject constructor(
     }
 
     fun setSortBy(sortBy: SortBy) {
-        filterState = filterState.copy(sortBy = sortBy)
+        sortState = sortBy
     }
 
     fun clearSearchInFilter() {
@@ -64,8 +66,7 @@ class SearchViewModel @Inject constructor(
         filterState = filterState.copy(
             from = null,
             to = null,
-            searchIn = listOf(),
-            sortBy = null,
+            searchIn = listOf()
         )
     }
 
@@ -74,7 +75,7 @@ class SearchViewModel @Inject constructor(
         from: String? = filterState.from.formatDateToISO(),
         to: String? = filterState.to.formatDateToISO(),
         searchInAttributes: List<SearchInAttribute>? = filterState.searchIn,
-        sortBy: SortBy? = filterState.sortBy
+        sortBy: SortBy? = sortState
     ) = viewModelScope.launch {
         searchScreenState = SearchScreenState(isLoading = true, showSearchResults = true)
 

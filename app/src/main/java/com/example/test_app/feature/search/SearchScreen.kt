@@ -21,6 +21,7 @@ fun SearchScreen(
 ) {
     val state = searchViewModel.searchScreenState
     val filterState = searchViewModel.filterState
+    val sortState = searchViewModel.sortState
 
     Scaffold(
         topBar = {
@@ -31,7 +32,7 @@ fun SearchScreen(
                         onFilter = {
                             navController.navigate(Route.Filter.name)
                         },
-                        isSorted = filterState.sortBy != null,
+                        isSorted = sortState != null,
                         onSort = {
                              navController.navigate(Route.SortByBottomSheet.name)
                         },
