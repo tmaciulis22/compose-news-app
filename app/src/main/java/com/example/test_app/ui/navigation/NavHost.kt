@@ -143,17 +143,17 @@ fun NavGraphBuilder.searchGraph(navController: NavHostController) {
                 Route.MoreTab.name -> slideInHorizontally({ -it })
                 Route.Filter.name,
                 Route.SearchIn.name,
-                Route.WebView.name -> fadeIn()
+                Route.WebView.routeWithArgumentKey -> fadeIn()
                 else -> slideInHorizontally({ it })
             }
         },
         exitTransition = { _, target ->
             when (target.destination.route) {
                 Route.ProfileTab.name,
-                Route.MoreTab.name  -> slideOutHorizontally({ -it })
+                Route.MoreTab.name -> slideOutHorizontally({ -it })
                 Route.Filter.name,
                 Route.SearchIn.name,
-                Route.WebView.name -> fadeOut()
+                Route.WebView.routeWithArgumentKey -> fadeOut()
                 else -> slideOutHorizontally({ it })
             }
         },

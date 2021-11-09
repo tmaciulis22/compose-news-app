@@ -1,5 +1,6 @@
 package com.example.test_app.feature.search
 
+import androidx.compose.animation.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -15,6 +16,7 @@ import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
 @Composable
+@ExperimentalAnimationApi
 fun SearchScreen(
     navController: NavController,
     searchViewModel: SearchViewModel
@@ -55,7 +57,11 @@ fun SearchScreen(
             stringResource(R.string.articles_list_title_quantity, it.totalArticles)
         } ?: stringResource(R.string.articles_list_title)
 
-        if (state.showSearchResults) {
+        AnimatedVisibility(
+            state.showSearchResults,
+            enter = slideInHorizontally({ it }),
+            exit = slideOutHorizontally({ it })
+        ) {
             ArticlesList(
                 title = articlesListTitle,
                 isLoading = state.isLoading,
@@ -65,7 +71,12 @@ fun SearchScreen(
                     navController.navigate(route = Route.WebView.getFullRoute(encodedUrl))
                 }
             )
-        } else if (state.searchHistory?.isNullOrEmpty() == false) {
+        }
+        AnimatedVisibility(
+            state.searchHistory?.isNullOrEmpty() == false,
+            enter = fadeIn(),
+            exit = fadeOut()
+        ) {
             SearchHistory(isLoading = state.isLoading, searches = state.searchHistory) {
                 searchViewModel.apply {
                     setQueryTextFilter(it)
