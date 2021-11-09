@@ -10,6 +10,7 @@ interface SearchEndpoint {
 
     @GET("search")
     suspend fun getArticles(
+        @Query("q") queryText: String,
         @Query("from") fromDate: String? = null,
         @Query("to") toDate: String? = null,
         @Query("in") inAttribute: String =

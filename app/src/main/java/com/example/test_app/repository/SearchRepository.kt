@@ -9,8 +9,9 @@ class SearchRepository @Inject constructor(
 ) {
 
     suspend fun getArticles(
+        queryText: String,
         from: String? = null,
         to: String? = null,
         searchInAttributes: List<SearchInAttribute>? = null
-    ) = searchEndpoint.getArticles(from, to, SearchInAttribute.getAttributesList(searchInAttributes))
+    ) = searchEndpoint.getArticles(queryText, from, to, SearchInAttribute.getAttributesList(searchInAttributes))
 }

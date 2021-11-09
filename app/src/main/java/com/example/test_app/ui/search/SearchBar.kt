@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.test_app.R
 
@@ -15,6 +16,8 @@ fun SearchBar(
     filterCount: Int = 0,
     onFilter: () -> Unit = {},
     onSort: () -> Unit = {},
+    textFieldValue: String? = null,
+    onTextChange: (String) -> Unit = {},
     onSearch: (String) -> Unit = {}
 ) {
     Row(
@@ -26,7 +29,7 @@ fun SearchBar(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(modifier = Modifier.weight(1f)) {
-            SearchTextField(onSearch)
+            SearchTextField(textFieldValue, onTextChange, onSearch)
         }
         FilterButton(filterCount, onFilter)
         SortButton(onSort)

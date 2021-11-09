@@ -19,16 +19,17 @@ import com.example.test_app.R
 
 @Composable
 fun SearchTextField(
+    textFieldValue: String? = null,
+    onTextChange: (String) -> Unit = {},
     onSearch: (String) -> Unit = {}
 ) {
-    var textState by remember { mutableStateOf("") }
     val focusManager = LocalFocusManager.current
 
     TextField(
         modifier = Modifier
             .fillMaxWidth(),
-        value = textState,
-        onValueChange = { textState = it },
+        value = textFieldValue ?: "",
+        onValueChange = { onTextChange(it) },
         textStyle = MaterialTheme.typography.h3,
         singleLine = true,
         leadingIcon = { Icon(Icons.Outlined.Search, contentDescription = null) },
@@ -48,8 +49,7 @@ fun SearchTextField(
         ),
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
         keyboardActions = KeyboardActions(onSearch = {
-            onSearch(textState)
-            textState = ""
+            onSearch(textFieldValue ?: "")
             focusManager.clearFocus()
         })
     )

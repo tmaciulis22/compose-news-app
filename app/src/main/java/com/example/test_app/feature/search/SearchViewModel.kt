@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.test_app.api.entity.SearchInAttribute
 import com.example.test_app.feature.filter.FilterState
+import com.example.test_app.feature.filter.formatDateToISO
 import com.example.test_app.repository.SearchHistoryRepository
 import com.example.test_app.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,6 +30,10 @@ class SearchViewModel @Inject constructor(
         getSearchHistory()
     }
 
+    fun setQueryTextFilter(queryText: String) {
+        filterState = filterState.copy(queryText = queryText)
+    }
+
     fun setFromFilter(from: String) {
         filterState = filterState.copy(from = from)
     }
@@ -46,36 +51,45 @@ class SearchViewModel @Inject constructor(
         filterState = filterState.copy(searchIn = previousSelections.toList())
     }
 
-    // Since by default GNews API search in title and description, clearSearchInFilter resets state to these attributes
     fun clearSearchInFilter() {
-        filterState = filterState.copy(searchIn = listOf(SearchInAttribute.Title, SearchInAttribute.Description))
+        filterState = filterState.copy(searchIn = listOf())
     }
 
     fun clearFilters() {
-        filterState = FilterState()
+        filterState = filterState.copy(from = null, to = null, searchIn = listOf())
     }
 
     fun getArticles(
-        from: String? = null,
-        to: String? = null,
-        searchInAttributes: List<SearchInAttribute>? = null
+        queryText: String? = filterState.queryText,
+        from: String? = filterState.from.formatDateToISO(),
+        to: String? = filterState.to.formatDateToISO(),
+        searchInAttributes: List<SearchInAttribute>? = filterState.searchIn
     ) = viewModelScope.launch {
-        searchScreenState = SearchScreenState(isLoading = true)
+        searchScreenState = SearchScreenState(isLoading = true, showSearchResults = true)
+
+        if (queryText.isNullOrBlank()) {
+            searchScreenState = SearchScreenState()
+            getSearchHistory()
+            return@launch
+        }
+
         searchRepository.getArticles(
+            queryText,
             from,
             to,
             searchInAttributes
         ).get(onSuccess = {
-            searchScreenState = SearchScreenState(data = it)
+            searchScreenState = SearchScreenState(data = it, showSearchResults = true)
         }, onFailure = { _, _ ->
             searchScreenState = SearchScreenState(isError = true)
         })
     }
 
     fun insertNewQuery(queryText: String) = viewModelScope.launch {
+        if (queryText.isBlank()) return@launch
+
         searchScreenState = SearchScreenState(isLoading = true)
         searchHistoryRepository.insertNewQuery(queryText)
-        getSearchHistory()
     }
 
     private fun getSearchHistory() = viewModelScope.launch {

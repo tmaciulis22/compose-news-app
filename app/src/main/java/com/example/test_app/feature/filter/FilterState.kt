@@ -3,9 +3,10 @@ package com.example.test_app.feature.filter
 import com.example.test_app.api.entity.SearchInAttribute
 
 data class FilterState(
+    val queryText: String? = null,
     val from: String? = null,
     val to: String? = null,
-    val searchIn: List<SearchInAttribute> = listOf(SearchInAttribute.Title, SearchInAttribute.Description)
+    val searchIn: List<SearchInAttribute> = listOf()
 ) {
     val count: Int
         get() {
@@ -18,4 +19,10 @@ data class FilterState(
 
             return totalCount
         }
+}
+
+fun String?.formatDateToISO(): String? {
+    if (this == null) return null
+
+    return this.replace("/", "-") + "T00:00:00Z"
 }

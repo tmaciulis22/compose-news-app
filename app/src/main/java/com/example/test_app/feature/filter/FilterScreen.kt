@@ -104,6 +104,9 @@ fun FilterScreen(
                 modifier = Modifier.padding(bottom = dimensionResource(R.dimen.grid_unit_10x)),
                 text = resources.getQuantityString(R.plurals.filters_button_text, filterState.count),
                 onClick = {
+                    if (!filterState.queryText.isNullOrBlank()) {
+                        searchViewModel.getArticles()
+                    }
                     navController.popBackStack()
                 }
             )

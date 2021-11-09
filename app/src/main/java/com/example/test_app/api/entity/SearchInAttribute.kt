@@ -16,6 +16,6 @@ enum class SearchInAttribute(val value: String, @StringRes val textRes: Int) {
             allAttributes.first { it.name == name }
 
         fun getAttributesList(attributes: List<SearchInAttribute>?) =
-            attributes?.joinToString(",") ?: ""
+            attributes?.joinToString(",") { it.value } ?: ""
     }
 }
