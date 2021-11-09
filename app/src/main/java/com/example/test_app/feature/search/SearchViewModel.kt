@@ -6,8 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.test_app.api.entity.SearchInAttribute
+import com.example.test_app.extension.formatDateToISO
 import com.example.test_app.feature.filter.FilterState
-import com.example.test_app.feature.filter.formatDateToISO
 import com.example.test_app.repository.SearchHistoryRepository
 import com.example.test_app.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -68,7 +68,6 @@ class SearchViewModel @Inject constructor(
         searchScreenState = SearchScreenState(isLoading = true, showSearchResults = true)
 
         if (queryText.isNullOrBlank()) {
-            searchScreenState = SearchScreenState()
             getSearchHistory()
             return@launch
         }
@@ -88,7 +87,6 @@ class SearchViewModel @Inject constructor(
     fun insertNewQuery(queryText: String) = viewModelScope.launch {
         if (queryText.isBlank()) return@launch
 
-        searchScreenState = SearchScreenState(isLoading = true)
         searchHistoryRepository.insertNewQuery(queryText)
     }
 

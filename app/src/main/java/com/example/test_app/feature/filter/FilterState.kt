@@ -20,9 +20,3 @@ data class FilterState(
             return totalCount
         }
 }
-
-fun String?.formatDateToISO(): String? {
-    if (this == null) return null
-
-    return this.replace("/", "-") + "T00:00:00Z"
-}
