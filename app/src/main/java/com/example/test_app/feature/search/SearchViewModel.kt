@@ -105,7 +105,7 @@ class SearchViewModel @Inject constructor(
 
     private fun getSearchHistory() = viewModelScope.launch {
         searchScreenState = SearchScreenState(isLoading = true)
-        val searchQueries = searchHistoryRepository.getAllQueries().map { it.queryText }
+        val searchQueries = searchHistoryRepository.getAllQueries().map { it.queryText }.asReversed()
         searchScreenState = SearchScreenState(searchHistory = searchQueries)
     }
 }

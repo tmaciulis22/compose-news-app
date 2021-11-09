@@ -25,7 +25,7 @@ import com.google.accompanist.navigation.material.bottomSheet
 @ExperimentalAnimationApi
 @ExperimentalMaterialNavigationApi
 fun AppNavHost(navController: NavHostController) {
-    AnimatedNavHost(navController = navController, startDestination = Route.SearchTab.name) {
+    AnimatedNavHost(navController = navController, startDestination = Route.NewsTab.name) {
         composable(
             Route.HomeTab.name,
             enterTransition = { initial, _ ->
