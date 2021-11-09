@@ -31,8 +31,9 @@ fun SearchScreen(
                         onFilter = {
                             navController.navigate(Route.Filter.name)
                         },
+                        isSorted = filterState.sortBy != null,
                         onSort = {
-                             // TODO
+                             navController.navigate(Route.SortByBottomSheet.name)
                         },
                         textFieldValue = filterState.queryText,
                         onTextChange = {
@@ -63,7 +64,7 @@ fun SearchScreen(
                     navController.navigate(route = Route.WebView.getFullRoute(encodedUrl))
                 }
             )
-        } else {
+        } else if (state.searchHistory?.isNullOrEmpty() == false) {
             SearchHistory(isLoading = state.isLoading, searches = state.searchHistory) {
                 searchViewModel.apply {
                     setQueryTextFilter(it)

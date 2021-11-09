@@ -13,13 +13,17 @@ import com.example.test_app.feature.filter.SearchInScreen
 import com.example.test_app.feature.news.NewsScreen
 import com.example.test_app.feature.search.SearchScreen
 import com.example.test_app.feature.search.SearchViewModel
+import com.example.test_app.feature.search.SortBottomSheetModal
 import com.example.test_app.feature.webView.WebViewScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.navigation
+import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
+import com.google.accompanist.navigation.material.bottomSheet
 
 @Composable
 @ExperimentalAnimationApi
+@ExperimentalMaterialNavigationApi
 fun AppNavHost(navController: NavHostController) {
     AnimatedNavHost(navController = navController, startDestination = Route.SearchTab.name) {
         composable(
@@ -128,6 +132,7 @@ fun AppNavHost(navController: NavHostController) {
 }
 
 @ExperimentalAnimationApi
+@ExperimentalMaterialNavigationApi
 fun NavGraphBuilder.searchGraph(navController: NavHostController) {
     navigation(
         startDestination = Route.Search.name,
@@ -163,6 +168,15 @@ fun NavGraphBuilder.searchGraph(navController: NavHostController) {
                 parentEntry
             )
             SearchScreen(navController, searchViewModel)
+        }
+        bottomSheet(Route.SortByBottomSheet.name) {
+            val parentEntry = remember {
+                navController.getBackStackEntry(Route.SearchTab.name)
+            }
+            val searchViewModel = hiltViewModel<SearchViewModel>(
+                parentEntry
+            )
+            SortBottomSheetModal(searchViewModel)
         }
         composable(
             Route.Filter.name,

@@ -48,4 +48,9 @@
     <string name="filter_title">Title</string>
     <string name="filter_description">Description</string>
     <string name="filter_content">Content</string>
+
+    <string name="bottom_sheet_sort_by_title">Sort By</string>
+
+    <string name="sort_by_upload_date">Upload date</string>
+    <string name="sort_by_relevance">Relevance</string>
 </resources>

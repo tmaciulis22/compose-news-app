@@ -15,6 +15,7 @@ import com.example.test_app.R
 fun SearchBar(
     filterCount: Int = 0,
     onFilter: () -> Unit = {},
+    isSorted: Boolean = false,
     onSort: () -> Unit = {},
     textFieldValue: String? = null,
     onTextChange: (String) -> Unit = {},
@@ -32,7 +33,7 @@ fun SearchBar(
             SearchTextField(textFieldValue, onTextChange, onSearch)
         }
         FilterButton(filterCount, onFilter)
-        SortButton(onSort)
+        SortButton(isSorted, onSort)
     }
 }
 

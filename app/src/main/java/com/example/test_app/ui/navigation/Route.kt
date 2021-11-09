@@ -18,6 +18,7 @@ enum class Route(
     Search,
     Filter,
     SearchIn,
+    SortByBottomSheet,
 
     WebView(argumentKey = "url");
 

@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.test_app.api.entity.SearchInAttribute
+import com.example.test_app.api.entity.SortBy
 import com.example.test_app.extension.formatDateToISO
 import com.example.test_app.feature.filter.FilterState
 import com.example.test_app.repository.SearchHistoryRepository
@@ -51,19 +52,29 @@ class SearchViewModel @Inject constructor(
         filterState = filterState.copy(searchIn = previousSelections.toList())
     }
 
+    fun setSortBy(sortBy: SortBy) {
+        filterState = filterState.copy(sortBy = sortBy)
+    }
+
     fun clearSearchInFilter() {
         filterState = filterState.copy(searchIn = listOf())
     }
 
     fun clearFilters() {
-        filterState = filterState.copy(from = null, to = null, searchIn = listOf())
+        filterState = filterState.copy(
+            from = null,
+            to = null,
+            searchIn = listOf(),
+            sortBy = null,
+        )
     }
 
     fun getArticles(
         queryText: String? = filterState.queryText,
         from: String? = filterState.from.formatDateToISO(),
         to: String? = filterState.to.formatDateToISO(),
-        searchInAttributes: List<SearchInAttribute>? = filterState.searchIn
+        searchInAttributes: List<SearchInAttribute>? = filterState.searchIn,
+        sortBy: SortBy? = filterState.sortBy
     ) = viewModelScope.launch {
         searchScreenState = SearchScreenState(isLoading = true, showSearchResults = true)
 
@@ -76,7 +87,8 @@ class SearchViewModel @Inject constructor(
             queryText,
             from,
             to,
-            searchInAttributes
+            searchInAttributes,
+            sortBy
         ).get(onSuccess = {
             searchScreenState = SearchScreenState(data = it, showSearchResults = true)
         }, onFailure = { _, _ ->
