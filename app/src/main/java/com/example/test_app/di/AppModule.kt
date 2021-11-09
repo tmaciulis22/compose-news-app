@@ -30,7 +30,7 @@ object AppModule {
     private const val BASE_URL_API = "https://gnews.io/api/v4/"
     private const val API_TOKEN_QUERY_PARAM = "token"
     // Yes, I know, this is a bad way to store a token,
-    // but due to time constraints I decided to leave it here for now instead of putting it into keystore
+    // but due to time constraints I decided to leave it here instead of putting it into keystore
     private const val API_TOKEN = "a2d8e0f0981b98b00e901e7c0e62d4fd"
 
     @Provides
@@ -45,7 +45,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideChannelDao(appDatabase: AppDatabase): SearchHistoryDao {
+    fun provideSearchHistoryDao(appDatabase: AppDatabase): SearchHistoryDao {
         return appDatabase.searchHistoryDao()
     }
 
