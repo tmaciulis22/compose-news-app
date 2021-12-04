@@ -231,3 +231,5 @@ fabric.properties
 
 !/gradle/wrapper/gradle-wrapper.jar
 .idea/inspectionProfiles/Project_Default.xml
+.idea/codeStyles/codeStyleConfig.xml
+.idea/codeStyles/Project.xml
