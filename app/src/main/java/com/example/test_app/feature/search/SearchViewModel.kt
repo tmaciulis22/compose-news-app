@@ -26,8 +26,8 @@ class SearchViewModel @Inject constructor(
 
     var filterState by mutableStateOf(FilterState())
         private set
-
     var sortState by mutableStateOf<SortBy?>(null)
+        private set
 
     init {
         getSearchHistory()

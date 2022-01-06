@@ -24,10 +24,11 @@ class NewsViewModel @Inject constructor(
 
     private fun getTopHeadlines() = viewModelScope.launch {
         newsScreenState = NewsScreenState(isLoading = true)
-        headlinesRepository.getTopHeadlines().get(onSuccess = {
-            newsScreenState = NewsScreenState(data = it)
-        }, onFailure = { _, _ ->
-            newsScreenState = NewsScreenState(isError = true)
-        })
+        headlinesRepository.getTopHeadlines()
+            .get(onSuccess = {
+                newsScreenState = NewsScreenState(data = it)
+            }, onFailure = { _, _ ->
+                newsScreenState = NewsScreenState(isError = true)
+            })
     }
 }

@@ -27,29 +27,27 @@ fun SearchScreen(
 
     Scaffold(
         topBar = {
-            Column {
-                AppBar(isRounded = true) {
-                    SearchBar(
-                        filterCount = filterState.count,
-                        onFilter = {
-                            navController.navigate(Route.Filter.name)
-                        },
-                        isSorted = sortState != null,
-                        onSort = {
-                             navController.navigate(Route.SortByBottomSheet.name)
-                        },
-                        textFieldValue = filterState.queryText,
-                        onTextChange = {
-                            searchViewModel.setQueryTextFilter(it)
-                        },
-                        onSearch = {
-                            searchViewModel.apply {
-                                insertNewQuery(it)
-                                getArticles()
-                            }
+            AppBar(isRounded = true) {
+                SearchBar(
+                    filterCount = filterState.count,
+                    onFilter = {
+                        navController.navigate(Route.Filter.name)
+                    },
+                    isSorted = sortState != null,
+                    onSort = {
+                         navController.navigate(Route.SortByBottomSheet.name)
+                    },
+                    textFieldValue = filterState.queryText,
+                    onTextChange = {
+                        searchViewModel.setQueryTextFilter(it)
+                    },
+                    onSearch = {
+                        searchViewModel.apply {
+                            insertNewQuery(it)
+                            getArticles()
                         }
-                    )
-                }
+                    }
+                )
             }
         }
     ) {
@@ -73,7 +71,7 @@ fun SearchScreen(
             )
         }
         AnimatedVisibility(
-            state.searchHistory?.isNullOrEmpty() == false,
+            state.searchHistory?.isNullOrEmpty() == false && !state.showSearchResults,
             enter = fadeIn(),
             exit = fadeOut()
         ) {

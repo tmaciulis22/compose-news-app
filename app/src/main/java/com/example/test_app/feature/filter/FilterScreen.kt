@@ -29,22 +29,20 @@ fun FilterScreen(
 
     Scaffold(
         topBar = {
-            Column {
-                AppBar(
-                    isElevated = false,
-                    isPadded = false,
-                    navigationButton = {
-                        ArrowBackButton {
-                            navController.popBackStack()
-                        }
-                    },
-                    actions = {
-                        ClearButton {
-                            searchViewModel.clearFilters()
-                        }
+            AppBar(
+                isElevated = false,
+                isPadded = false,
+                navigationButton = {
+                    ArrowBackButton {
+                        navController.popBackStack()
                     }
-                )
-            }
+                },
+                actions = {
+                    ClearButton {
+                        searchViewModel.clearFilters()
+                    }
+                }
+            )
         }
     ) { paddingValues ->
         Column(

@@ -26,8 +26,7 @@ fun SearchTextField(
     val focusManager = LocalFocusManager.current
 
     TextField(
-        modifier = Modifier
-            .fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth(),
         value = textFieldValue ?: "",
         onValueChange = { onTextChange(it) },
         textStyle = MaterialTheme.typography.h3,

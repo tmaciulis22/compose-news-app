@@ -233,3 +233,4 @@ fabric.properties
 .idea/inspectionProfiles/Project_Default.xml
 .idea/codeStyles/codeStyleConfig.xml
 .idea/codeStyles/Project.xml
+.idea/gradle.properties

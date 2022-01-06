@@ -59,6 +59,6 @@ fun LabeledCheckbox(
 
 @Preview
 @Composable
-fun CheckboxPreview() {
+fun LabeledCheckboxPreview() {
     LabeledCheckbox("Relevance", true)
 }
